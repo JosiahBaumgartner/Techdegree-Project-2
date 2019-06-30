@@ -39,7 +39,7 @@ function showPage(list, page) {
   const startIndex = (page * studentsPerPage) - studentsPerPage;
   const endIndex = page * studentsPerPage;
 
-  for (let i=0, i < studentLi.length , i+=1;)
+  for (let i=0; i < studentLi.length; i+=1)
     if (studentLi.length >= startIndex && studentLi.length < endIndex) {
       target.style.display = "";
     } else {
