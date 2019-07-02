@@ -39,10 +39,10 @@ function showPage(list, page) {
   const endIndex = page * studentsPerPage;
 
   for (let i=0; i < list.length; i+=1) {
-    if (studentLi.length >= startIndex && list.length < endIndex) {
-      target.style.display = "";
+    if ( i >= startIndex && i < endIndex) {
+      list[i].style.display = "";
     } else {
-      target.style.display = "none";
+      list[i].style.display = "none";
     }
   }
 }
@@ -69,12 +69,14 @@ function appendPageLinks(list) {
   li[i].firstElementChild.textContent = i+1;
   li[i].firstElementChild.setAttribute("href", "#");
 
-  
+// create a loop here to attach click event listeners to each <a> tag.
+// event handler should wipe classes from all links and set clicked tag as class "active".
+// event handler should run showpage(studentLi, a.textContent);
 }
 
 }
-
-
+showPage(studentLi, 1);
+appendPageLinks(studentLi);
 
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
