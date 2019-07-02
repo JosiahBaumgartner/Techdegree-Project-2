@@ -17,7 +17,7 @@ FSJS project 2 - List Filter and Pagination
    scoped to that function.
 ***/
 
-const studentLi = document.querySelector(".student-list");
+const studentLi = document.querySelector(".student-list").children;
 const studentsPerPage = 10;
 
 /***
@@ -38,8 +38,8 @@ function showPage(list, page) {
   const startIndex = (page * studentsPerPage) - studentsPerPage;
   const endIndex = page * studentsPerPage;
 
-  for (let i=0; i < studentLi.length; i+=1) {
-    if (studentLi.length >= startIndex && studentLi.length < endIndex) {
+  for (let i=0; i < list.length; i+=1) {
+    if (studentLi.length >= startIndex && list.length < endIndex) {
       target.style.display = "";
     } else {
       target.style.display = "none";
@@ -52,17 +52,21 @@ function showPage(list, page) {
    functionality to the pagination buttons.
 ***/
 function appendPageLinks(list) {
-  const div; // Use these variables to clean up code below later
-  const ul;
-  const li;
+//  const div; // Use these variables to clean up code below later IF YOU CAN!!! WTF
+//  const ul;
+//  const li;
 
-  studentLi.parentElement.appendChild(document.createElement("div"));
-  studentLi.nextElementSibling.className = "pagination";
-  studentLi.nextElementSibling.appendChild(document.createElement("ul"));
-  studentLi.nextElementSibling.firstElementChild.appendChild(document.createElement("li"));
-  studentLi.nextElementSibling.firstElementChild.firstElementChild.appendChild(document.createElement("a"));
-  studentLi.nextElementSibling.firstElementChild.firstElementChild.firstElementChild.textContent = "1";
+  document.querySelector(".page").appendChild(document.createElement("div"));
+  document.querySelector(".student-list").nextElementSibling.className = "pagination";
+  document.querySelector(".student-list").nextElementSibling.appendChild(document.createElement("ul"));
 
+// create for loop here to figure how many pages are needed and create links. pages = list.length/studentsPerPage. list argument for function is full list from index?
+  for (let i =0; i < list.length/studentsPerPage; i+=1){
+
+  document.querySelector(".student-list").nextElementSibling.firstElementChild.appendChild(document.createElement("li"));
+  document.querySelector(".student-list").nextElementSibling.firstElementChild.firstElementChild.appendChild(document.createElement("a"));
+  document.querySelector(".student-list").nextElementSibling.firstElementChild.firstElementChild.firstElementChild.textContent = "1"; // replace 1 with dynamic number
+}
 
 }
 
