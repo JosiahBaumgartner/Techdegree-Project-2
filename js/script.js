@@ -52,20 +52,24 @@ function showPage(list, page) {
    functionality to the pagination buttons.
 ***/
 function appendPageLinks(list) {
-//  const div; // Use these variables to clean up code below later IF YOU CAN!!! WTF
-//  const ul;
-//  const li;
 
   document.querySelector(".page").appendChild(document.createElement("div"));
   document.querySelector(".student-list").nextElementSibling.className = "pagination";
-  document.querySelector(".student-list").nextElementSibling.appendChild(document.createElement("ul"));
+  const div = document.querySelector(".pagination");
+
+  div.appendChild(document.createElement("ul"));
+  const ul = document.querySelector(".student-list").nextElementSibling.firstElementChild;
 
 // create for loop here to figure how many pages are needed and create links. pages = list.length/studentsPerPage. list argument for function is full list from index?
   for (let i =0; i < list.length/studentsPerPage; i+=1){
 
-  document.querySelector(".student-list").nextElementSibling.firstElementChild.appendChild(document.createElement("li"));
-  document.querySelector(".student-list").nextElementSibling.firstElementChild.firstElementChild.appendChild(document.createElement("a"));
-  document.querySelector(".student-list").nextElementSibling.firstElementChild.firstElementChild.firstElementChild.textContent = "1"; // replace 1 with dynamic number
+  ul.appendChild(document.createElement("li"));
+  const li = ul.getElementsByTagName("li");
+  li[i].appendChild(document.createElement("a"));
+  li[i].firstElementChild.textContent = i+1;
+  li[i].firstElementChild.setAttribute("href", "#");
+
+  
 }
 
 }
