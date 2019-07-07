@@ -74,9 +74,13 @@ function appendPageLinks(list) {
 // event handler should wipe classes from all links and set clicked tag as class "active".
 // event handler should run showpage(studentLi, a.textContent);
 }
-li.children.addEventListener("click", () => {
-  li[i].className = "";  
-});
+// commented out code below for a document event listener that bubbles event up and checks if its from an <a> tag. check code because idk if the condition is good also ask if I will get marked down for doing it this way.
+//  document.addEventListener("click", () => {
+  //  if(event.target === a){
+  //  li.className = "";
+
+  //  }
+  //});
 }
 showPage(studentLi, 1);
 appendPageLinks(studentLi);
