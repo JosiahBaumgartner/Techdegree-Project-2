@@ -69,11 +69,14 @@ function appendPageLinks(list) {
   li[i].firstElementChild.textContent = i+1;
   li[i].firstElementChild.setAttribute("href", "#");
 
+
 // create a loop here to attach click event listeners to each <a> tag.
 // event handler should wipe classes from all links and set clicked tag as class "active".
 // event handler should run showpage(studentLi, a.textContent);
 }
-
+li.children.addEventListener("click", () => {
+  li[i].className = "";  
+});
 }
 showPage(studentLi, 1);
 appendPageLinks(studentLi);
