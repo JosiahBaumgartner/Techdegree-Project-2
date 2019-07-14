@@ -52,18 +52,21 @@ function appendPageLinks(list) {
   li[i].firstElementChild.textContent = i+1;
   li[i].firstElementChild.setAttribute("href", "#");
 
-
-// create a loop here to attach click event listeners to each <a> tag.
-// event handler should wipe classes from all links and set clicked tag as class "active".
+  // Defaults page 1 button to class "active"
+  ul.children[0].firstElementChild.className = "active";
+// Event handler wipes classes from all links and set clicked tag as class "active".
 // event handler should run showpage(studentLi, a.textContent);
 }
-// commented out code below for a document event listener that bubbles event up and checks if its from an <a> tag. check code because idk if the condition is good also ask if I will get marked down for doing it this way.
-//  document.addEventListener("click", () => {
-  //  if(event.target === a){
-  //  li.className = "";
-
-  //  }
-  //});
+// Document event listener that bubbles event up and checks if click was on an <a> tag.
+  document.addEventListener("click", () => {
+  if(event.target.tagName === "A" ){
+    showPage(studentLi, event.target.textContent)
+    for (i = 0; i < list.length/studentsPerPage; i+=1){
+    ul.children[i].firstElementChild.classList.remove("active");
+    }
+    event.target.className = "active";
+  }
+  });
 }
 showPage(studentLi, 1);
 appendPageLinks(studentLi);
