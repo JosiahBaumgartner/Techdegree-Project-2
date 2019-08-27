@@ -81,8 +81,12 @@ function appendSearchBar() {
   searchDiv.querySelector("button").textContent = "Search";
 
   searchDiv.addEventListener("keyup", () => {
+    let searchLi = [];
     for(let i = 0; i < list.length/studentsPerPage; i+=1) {
-      if(students[i].includes(searchDiv.querySelector("input").value))
+      students[i].style.display = "none"
+      if(students[i].includes(searchDiv.querySelector("input").value)){
+
+      }
 
     }
   })
