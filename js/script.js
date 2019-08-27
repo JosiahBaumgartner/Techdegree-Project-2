@@ -68,8 +68,29 @@ function appendPageLinks(list) {
   }
   });
 }
+
+// Function to add search bar
+function appendSearchBar() {
+  const header = document.querySelector(".page-header");
+  header.appendChild(document.createElement("div"));
+  header.querySelector("div").className = "student-search";
+  const searchDiv = document.querySelector(".student-search");
+  searchDiv.appendChild(document.createElement("input"));
+  searchDiv.appendChild(document.createElement("button"));
+  searchDiv.querySelector("input").setAttribute("placeholder", "Search for students...");
+  searchDiv.querySelector("button").textContent = "Search";
+
+  searchDiv.addEventListener("keyup", () => {
+    for(let i = 0; i < list.length/studentsPerPage; i+=1) {
+      if(students[i].includes(searchDiv.querySelector("input").value))
+
+    }
+  })
+
+}
 showPage(studentLi, 1);
 appendPageLinks(studentLi);
+appendSearchBar();
 
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
