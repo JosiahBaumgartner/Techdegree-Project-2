@@ -59,12 +59,12 @@ function appendPageLinks(list) {
   // Defaults page 1 button to class "active"
   ul.children[0].firstElementChild.className = "active";
 // Event handler wipes classes from all links and set clicked tag as class "active".
-// event handler should run showpage(studentLi, a.textContent);
+// event handler should run showPage(list, a.textContent);
 }
 // Document event listener that bubbles event up and checks if click was on an <a> tag.
   document.addEventListener("click", () => {
   if(event.target.tagName === "A" ){
-    showPage(studentLi, event.target.textContent)
+    showPage(list, event.target.textContent)
     for (i = 0; i < list.length/studentsPerPage; i+=1){
     ul.children[i].firstElementChild.classList.remove("active");
     }
@@ -95,7 +95,7 @@ function appendSearchBar(list) {
     }
     showPage(searchLi, 1);
 
-    appendPageLinks(searchLi);
+    appendPageLinks(searchLi); //I NEED TO CREATE NO RESULTS FOUND MESSAGE
   });
 
 }
