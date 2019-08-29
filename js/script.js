@@ -35,7 +35,11 @@ function showPage(list, page) {
 // Create the `appendPageLinks function` to generate, append, and add functionality to the pagination buttons.
 
 function appendPageLinks(list) {
+  //remove any exsisting pagination links
+  if (document.querySelector(".pagination") != null) {
+    document.querySelector(".pagination").remove()}
 
+  // Creates elements
   document.querySelector(".page").appendChild(document.createElement("div"));
   document.querySelector(".student-list").nextElementSibling.className = "pagination";
   const div = document.querySelector(".pagination");
@@ -70,7 +74,7 @@ function appendPageLinks(list) {
 }
 
 // Function to add search bar
-function appendSearchBar() {
+function appendSearchBar(list) {
   const header = document.querySelector(".page-header");
   header.appendChild(document.createElement("div"));
   header.querySelector("div").className = "student-search";
@@ -80,21 +84,22 @@ function appendSearchBar() {
   searchDiv.querySelector("input").setAttribute("placeholder", "Search for students...");
   searchDiv.querySelector("button").textContent = "Search";
 
+// Functionality for search bar. Hides full list, generates new array of students that include search input and displays new list.
   searchDiv.addEventListener("keyup", () => {
     let searchLi = [];
-    for(let i = 0; i < list.length/studentsPerPage; i+=1) {
-      students[i].style.display = "none"
-      if(students[i].includes(searchDiv.querySelector("input").value)){
-
+    for(let i = 0; i < list.length; i+=1) {
+      list[i].style.display = "none"
+      if(list[i].textContent.includes(searchDiv.querySelector("input").value)){
+        searchLi.push(list[i]);
       }
-
     }
-  })
+    showPage(searchLi, 1);
+
+    appendPageLinks(searchLi);
+  });
 
 }
+// Runs functions to display default full list and links. Trigering search bar keyup or click event listeners overwrites these.
 showPage(studentLi, 1);
 appendPageLinks(studentLi);
-appendSearchBar();
-
-
-// Remember to delete the comments that came with this file, and replace them with your own code comments.
+appendSearchBar(studentLi);
