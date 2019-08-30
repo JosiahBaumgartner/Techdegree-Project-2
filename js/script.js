@@ -16,8 +16,7 @@ const studentLi = document.querySelectorAll(".student-item");
 const studentsPerPage = 10;
 
 /***
-   Create the `showPage` function to hide all of the items in the
-   list except for the ten you want to show.
+   showPage function hides all items not on current page.
 ***/
 function showPage(list, page) {
   const startIndex = (page * studentsPerPage) - studentsPerPage;
@@ -35,17 +34,16 @@ function showPage(list, page) {
 // Create the `appendPageLinks function` to generate, append, and add functionality to the pagination buttons.
 
 function appendPageLinks(list) {
+  // Starting reference point node
+  const page = document.querySelector(".page");
   //remove any exsisting pagination links
   if (document.querySelector(".pagination") != null) {
     document.querySelector(".pagination").remove()}
 
-  // Creates elements
-  document.querySelector(".page").appendChild(document.createElement("div"));
-  document.querySelector(".student-list").nextElementSibling.className = "pagination";
-  const div = document.querySelector(".pagination");
-
-  div.appendChild(document.createElement("ul"));
-  const ul = document.querySelector(".student-list").nextElementSibling.firstElementChild;
+  // Creates elements and sets class
+  const div = page.appendChild(document.createElement("div"));
+  div.className = "pagination";
+  const ul = div.appendChild(document.createElement("ul"));
 
 // Create for loop here to figure how many pages are needed and create links. pages = list.length/studentsPerPage.
   for (let i = 0; i < list.length/studentsPerPage; i+=1){
@@ -75,6 +73,8 @@ function appendPageLinks(list) {
 
 // Function to add search bar
 function appendSearchBar(list) {
+  // Creates HTML elements, set attributes and creates variables as reference points to work from
+  const page = document.querySelector(".page")
   const header = document.querySelector(".page-header");
   header.appendChild(document.createElement("div"));
   header.querySelector("div").className = "student-search";
@@ -87,15 +87,24 @@ function appendSearchBar(list) {
 // Functionality for search bar. Hides full list, generates new array of students that include search input and displays new list.
   searchDiv.addEventListener("keyup", () => {
     let searchLi = [];
-    for(let i = 0; i < list.length; i+=1) {
+    for (let i = 0; i < list.length; i+=1) {
       list[i].style.display = "none"
       if(list[i].textContent.includes(searchDiv.querySelector("input").value)){
         searchLi.push(list[i]);
       }
     }
-    showPage(searchLi, 1);
+    //Creates a no results found message if first spot of search array is empty, deletes message if search finds something again.
+    if (searchLi.length === 0 && page.querySelectorAll("p").length === 0) {
 
-    appendPageLinks(searchLi); //I NEED TO CREATE NO RESULTS FOUND MESSAGE
+      const noResults = page.appendChild(document.createElement("p"));
+      noResults.textContent = "No results found.";
+    } else if (page.querySelectorAll("p").length > 0) {
+        page.querySelector("p").remove();
+    }
+
+    // Shows search results or lack thereof and page links
+    showPage(searchLi, 1);
+    appendPageLinks(searchLi);
   });
 
 }
