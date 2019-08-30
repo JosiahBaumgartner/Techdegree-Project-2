@@ -94,7 +94,7 @@ function appendSearchBar(list) {
       }
     }
     //Creates a no results found message if first spot of search array is empty, deletes message if search finds something again.
-    if (searchLi.length === 0 && page.querySelectorAll("p").length === 0) {
+    if (searchLi.length === 0 && page.querySelectorAll("p").length <= 0) {
 
       const noResults = page.appendChild(document.createElement("p"));
       noResults.textContent = "No results found.";
