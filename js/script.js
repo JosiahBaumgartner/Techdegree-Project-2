@@ -67,6 +67,7 @@ function appendPageLinks(list) {
 // Function to add search bar
 function appendSearchBar(list) {
   // Creates HTML elements, set attributes and creates variables as reference points to work from
+
   header.appendChild(document.createElement("div"));
   header.querySelector("div").className = "student-search";
   const searchDiv = document.querySelector(".student-search");
@@ -81,11 +82,12 @@ function appendSearchBar(list) {
 }
 // Functionality for search bar. Hides full list, generates new array of students that include search input and displays new list.
 function createSearchLi(list) {
+  const inputLowerCase = document.querySelector("input").value.toLowerCase();
   const searchDiv = document.querySelector(".student-search");
   searchLi = [];
   for (let i = 0; i < list.length; i+=1) {
     list[i].style.display = "none"
-    if(list[i].textContent.includes(searchDiv.querySelector("input").value)){
+    if (list[i].textContent.includes(inputLowerCase)) {
       searchLi.push(list[i]);
     }
   }
