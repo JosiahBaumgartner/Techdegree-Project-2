@@ -93,10 +93,9 @@ function appendSearchBar(list) {
         pageDiv.querySelector("p").remove();
     }
 
-    // Shows search results or lack thereof and page links
+    // Shows search results and page links
     showPage(searchLi, 1);
     appendPageLinks(searchLi);
-    console.log(searchLi);
   });
 
 }
