@@ -70,34 +70,35 @@ function appendSearchBar(list) {
   header.appendChild(document.createElement("div"));
   header.querySelector("div").className = "student-search";
   const searchDiv = document.querySelector(".student-search");
-  searchDiv.appendChild(document.createElement("input"));
-  searchDiv.appendChild(document.createElement("button"));
+  const searchBox = searchDiv.appendChild(document.createElement("input"));
+  const searchButton = searchDiv.appendChild(document.createElement("button"));
   searchDiv.querySelector("input").setAttribute("placeholder", "Search for students...");
   searchDiv.querySelector("button").textContent = "Search";
+   // Runs function to give search bar and button functionality.
+  searchBox.addEventListener("keyup", () => { createSearchLi(list); });
+  searchButton.addEventListener("click", () => { createSearchLi(list); });
 
-  // Functionality for search bar. Hides full list, generates new array of students that include search input and displays new list.
-  searchDiv.addEventListener("keyup", () => {
-    searchLi = [];
-    for (let i = 0; i < list.length; i+=1) {
-      list[i].style.display = "none"
-      if(list[i].textContent.includes(searchDiv.querySelector("input").value)){
-        searchLi.push(list[i]);
-      }
+}
+// Functionality for search bar. Hides full list, generates new array of students that include search input and displays new list.
+function createSearchLi(list) {
+  const searchDiv = document.querySelector(".student-search");
+  searchLi = [];
+  for (let i = 0; i < list.length; i+=1) {
+    list[i].style.display = "none"
+    if(list[i].textContent.includes(searchDiv.querySelector("input").value)){
+      searchLi.push(list[i]);
     }
-    //Creates a no results found message if first spot of search array is empty, deletes message if search finds something again.
-    if (searchLi.length === 0 && pageDiv.querySelectorAll("p").length === 0) {
-
-      const noResults = pageDiv.appendChild(document.createElement("p"));
-      noResults.textContent = "No results found.";
-    } else if (searchLi.length !== 0 && pageDiv.querySelectorAll("p").length !== 0) {
-        pageDiv.querySelector("p").remove();
-    }
-
-    // Shows search results and page links
-    showPage(searchLi, 1);
-    appendPageLinks(searchLi);
-  });
-
+  }
+  //Creates a no results found message if first spot of search array is empty, deletes message if search finds something again.
+  if (searchLi.length === 0 && pageDiv.querySelectorAll("p").length === 0) {
+    const noResults = pageDiv.appendChild(document.createElement("p"));
+    noResults.textContent = "No results found.";
+  } else if (searchLi.length !== 0 && pageDiv.querySelectorAll("p").length !== 0) {
+      pageDiv.querySelector("p").remove();
+  }
+  // Shows search results and page links
+  showPage(searchLi, 1);
+  appendPageLinks(searchLi);
 }
 // Runs functions to display default full list and links. Trigering search bar keyup or click event listeners overwrites these.
 showPage(studentLi, 1);
